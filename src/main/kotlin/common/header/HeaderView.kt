@@ -1,5 +1,6 @@
 package common.header
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.TextField
@@ -9,6 +10,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import common.menu.MenuCell
 import common.menu.MenuCellModel
+import extension.imageFile
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
+import java.io.File
 
 @Composable
 fun HeaderView() {
@@ -19,10 +25,10 @@ fun HeaderView() {
             MenuCellModel("Жанры"),
             MenuCellModel("Радио")
     )
-
+    
     Row(modifier = Modifier.fillMaxWidth() + Modifier.height(height)) {
-//        val image = imageResource("D:\\Development\\Compose\\desktopSample\\assets\\ic_logo.png")
-//        Image(image, modifier = Modifier.size(width = 300.dp, height = height))
+        Image(imageFile(File("D:\\Development\\Compose\\desktopSample\\assets\\ic_logo.png")),
+                modifier = Modifier.padding(start = 24.dp, end = 16.dp, top = 8.dp, bottom = 8.dp))
         TextField(
                 value = "",
                 modifier = Modifier.width(300.dp)
