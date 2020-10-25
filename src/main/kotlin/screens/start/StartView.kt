@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import common.header.HeaderView
+import common.player.PlayerView
 import screens.start.views.track.TrackCell
 import screens.start.views.track.TrackModel
 
@@ -24,10 +25,11 @@ fun StartView() {
             TrackModel(imageUrl = "Empty", trackName = "Upset", artistName = "Gashi")
     )
 
-    var toastState = remember { mutableStateOf("") }
+    val toastState = remember { mutableStateOf("") }
 
     Scaffold(
             topBar = { HeaderView() },
+            bottomBar = { PlayerView() },
             bodyContent = {
                 ScrollableColumn(modifier = Modifier.fillMaxSize()) {
                     if (toastState.value.isNotBlank()) {
