@@ -6,6 +6,8 @@ import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,11 +27,14 @@ fun AuthView() {
             )
     )
 
+    val emailState = mutableStateOf(TextFieldValue(""))
+    val passwordState = mutableStateOf(TextFieldValue(""))
+
     Scaffold(modifier = Modifier.fillMaxSize()) {
         Box(modifier = Modifier.fillMaxSize()) {
             Column(modifier = Modifier.align(Alignment.Center).then(Modifier.width(300.dp))) {
                 TextField(
-                        TextFieldValue(""),
+                        emailState.value,
                         backgroundColor = Color.Transparent,
                         label = { Text("Email") },
                         placeholder = {
@@ -38,12 +43,13 @@ fun AuthView() {
                         activeColor = Color(Palette.primaryColor),
                         modifier = Modifier.padding(top = 24.dp).then(Modifier.fillMaxWidth()),
                         onValueChange = {
+                            emailState.value = it
                             authViewModel.obtainEvent(AuthEvents.EmailChanged(newValue = it.text))
                         }
                 )
 
                 TextField(
-                        TextFieldValue(""),
+                        passwordState.value,
                         backgroundColor = Color.Transparent,
                         label = { Text("Пароль") },
                         placeholder = {
@@ -52,6 +58,7 @@ fun AuthView() {
                         activeColor = Color(Palette.primaryColor),
                         modifier = Modifier.padding(top = 16.dp).then(Modifier.fillMaxWidth()),
                         onValueChange = {
+                            passwordState.value = it
                             authViewModel.obtainEvent(AuthEvents.PasswordChanged(newValue = it.text))
                         }
                 )
