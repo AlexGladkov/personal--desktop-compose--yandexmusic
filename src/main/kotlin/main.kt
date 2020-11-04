@@ -9,7 +9,7 @@ import screens.start.MyCollectionView
 @ExperimentalFoundationApi
 fun main() =
         Window(title = "Yandex.Music", size = IntSize(1200, 800)) {
-            val isUserAuthorized = remember { mutableStateOf(true) }
+            val isUserAuthorized = remember { mutableStateOf(false) }
 
             if (isUserAuthorized.value) {
                 MyCollectionView()
