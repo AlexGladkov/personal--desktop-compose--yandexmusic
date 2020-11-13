@@ -14,10 +14,11 @@ import extension.imageFile
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.withContext
+import screens.start.ContentState
 import java.io.File
 
 @Composable
-fun HeaderView() {
+fun HeaderView(onMenuClick: (ContentState) -> Unit) {
     val height = 70.dp
     val menuItems = mutableListOf(
             MenuCellModel("Главная", isSelected = true),
@@ -25,7 +26,7 @@ fun HeaderView() {
             MenuCellModel("Жанры"),
             MenuCellModel("Радио")
     )
-    
+
     Row(modifier = Modifier.fillMaxWidth() + Modifier.height(height)) {
         Image(imageFile(File("D:\\Development\\Compose\\desktopSample\\assets\\ic_logo.png")),
                 modifier = Modifier.padding(start = 24.dp, end = 16.dp, top = 8.dp, bottom = 8.dp))
@@ -44,6 +45,19 @@ fun HeaderView() {
 
                 })
 
-        menuItems.map { MenuCell(it, modifier = Modifier.align(Alignment.CenterVertically)) }
+        menuItems.map { model ->
+            MenuCell(
+                    model,
+                    modifier = Modifier.align(Alignment.CenterVertically),
+                    onClick = {
+                        when (it.title) {
+                            "Главная" -> onMenuClick(ContentState.Main)
+                            "Подкасты" -> onMenuClick(ContentState.Podcasts)
+                            "Жанры" -> onMenuClick(ContentState.Genres)
+                            "Радио" -> onMenuClick(ContentState.Radio)
+                        }
+                    }
+            )
+        }
     }
 }

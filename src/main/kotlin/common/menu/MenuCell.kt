@@ -9,7 +9,8 @@ import components.link.LinkView
 data class MenuCellModel(val title: String, val isSelected: Boolean = false)
 
 @Composable
-fun MenuCell(model: MenuCellModel, modifier: Modifier = Modifier) {
+fun MenuCell(model: MenuCellModel, modifier: Modifier = Modifier,
+             onClick: (MenuCellModel) -> Unit) {
     LinkView(
             modifier = modifier,
             text = model.title,
@@ -17,7 +18,7 @@ fun MenuCell(model: MenuCellModel, modifier: Modifier = Modifier) {
                     fontSize = 16.sp
             ),
             onClick = {
-
+                onClick.invoke(model)
             }
     )
 }

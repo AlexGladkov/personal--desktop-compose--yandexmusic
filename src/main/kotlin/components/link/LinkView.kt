@@ -1,10 +1,12 @@
 package components.link
 
-import androidx.compose.foundation.Text
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Divider
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.gesture.tapGestureFilter
 import androidx.compose.ui.graphics.Color
@@ -19,6 +21,7 @@ fun LinkView(
         defaultColor: Color = Color.Black,
         hoverColor: Color = Color.Red,
         textStyle: TextStyle = TextStyle(),
+        isSelected: Boolean = false,
         onClick: () -> Unit
 ) {
     val textColor = remember { mutableStateOf(defaultColor) }
@@ -35,16 +38,22 @@ fun LinkView(
         onClick.invoke()
     }
 
-    Text(
-            modifier = modifier
-                    .then(Modifier.padding(start = 16.dp, end = 16.dp))
-                    .then(mouseHover)
-                    .then(mouseClick),
-            text = text,
-            style = TextStyle(
-                    color = textColor.value,
-                    fontSize = textStyle.fontSize,
-                    fontWeight = textStyle.fontWeight
-            )
-    )
+    Column {
+        Text(
+                modifier = modifier
+                        .then(Modifier.padding(start = 16.dp, end = 16.dp))
+                        .then(mouseHover)
+                        .then(mouseClick),
+                text = text,
+                style = TextStyle(
+                        color = textColor.value,
+                        fontSize = textStyle.fontSize,
+                        fontWeight = textStyle.fontWeight
+                )
+        )
+
+        if (isSelected) {
+            Divider(modifier = Modifier.padding(top = 4.dp).width(40.dp).align(Alignment.CenterHorizontally), color = Color.Red, thickness = 3.dp)
+        }
+    }
 }

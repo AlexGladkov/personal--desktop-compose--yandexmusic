@@ -1,10 +1,10 @@
 package screens.start.views.UserHeaderView
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -60,7 +60,7 @@ private fun makeRandomButtonView() {
 
             },
             content = {
-                Text("Вперемешку")
+                makeButtonText("Вперемешку")
             }
     )
 }
@@ -69,11 +69,12 @@ private fun makeRandomButtonView() {
 private fun makeRadioButtonView(modifier: Modifier) =
         Box(modifier = modifier) {
             Button(
+                    shape = RoundedCornerShape(16.dp),
                     onClick = {
 
                     },
                     content = {
-                        Text("Радио")
+                        makeButtonText("Радио")
                     }
             )
         }
@@ -82,11 +83,22 @@ private fun makeRadioButtonView(modifier: Modifier) =
 @Composable
 private fun makeSettingsButtonView() {
     Button(
+            shape = RoundedCornerShape(16.dp),
             onClick = {
 
             },
             content = {
-                Text("Настройки")
+                makeButtonText("Настройки")
             }
+    )
+}
+
+@Composable
+private fun makeButtonText(value: String) {
+    Text(text = value,
+            style = TextStyle(
+                    color = Color.White,
+                    fontWeight = FontWeight.Medium
+            )
     )
 }
